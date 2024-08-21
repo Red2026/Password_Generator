@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 //
-public class mainProject {
+public class window {
     // 定义主窗口
     private JFrame frame;
     // 定义文本字段，用于用户输入
@@ -16,7 +16,7 @@ public class mainProject {
     /**
      * 构造函数，初始化窗口、文本字段和按钮，并将它们添加到窗口中
      */
-    public mainProject() {
+    public window() {
         // 初始化窗口
         frame = new JFrame("强密码生成器");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +69,7 @@ public class mainProject {
             JOptionPane.showMessageDialog(frame, "不能为空", "错误" , JOptionPane.ERROR_MESSAGE);
 
         } else if (input.matches("[0-9]+")) {
-            String input2 = test(Integer.parseInt(input));
+            String input2 = calculate.calculate(Integer.parseInt(input));
             JTextArea textArea = new JTextArea(input2);
             textArea.setEditable(false); // 设置为只读
 
@@ -83,51 +83,5 @@ public class mainProject {
             // 如果输入既不是纯数字也不是纯字母，弹出提示框
             JOptionPane.showMessageDialog(frame, "不是数字", "错误", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-
-    /**
-     * 生成指定长度的随机代码
-     *
-     * @param n 生成代码的长度
-     * @return 生成的随机代码
-     */
-    public static String test(int n) {
-        String code = "";
-        for (int i = 0; i < n; i++) {
-            int type = (int) (Math.random() * 3);
-
-            switch (type) {
-                case 0:
-                    int num = (int) (Math.random() * 10);
-                    code += num;
-                    break;
-
-                case 1:
-                    int num2 = (int) (Math.random() * 26);
-                    char ch = (char) ('A' + num2);
-                    code += ch;
-                    break;
-
-                case 2:
-                    int num3 = (int) (Math.random() * 26);
-                    char ch2 = (char) ('a' + num3);
-                    code += ch2;
-                    break;
-            }
-        }
-        return code;
-    }
-
-    /**
-     * 主方法，程序的入口点
-     * 使用SwingUtilities.invokeLater确保GUI在事件调度线程(EDT)上被创建和显示
-     *
-     * @param args 命令行参数
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new mainProject(); // 确保在EDT上创建和显示GUI
-        });
     }
 }
